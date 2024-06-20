@@ -3,14 +3,6 @@
 include "connect.php";
 include "logic.php";
 
-
-$stmt = $pdo->prepare("SELECT sudo FROM user WHERE token = ?");
-$stmt->execute([$_COOKIE["token"]]);
-$sudo = ($stmt->fetch())["sudo"];
-// if (!$sudo && !isset($_GET["fail"])) {
-//     // header ("location: index.php?fail=test server ");
-//     echo "test server sudo only";
-// }
 ?>
 
 <html>
@@ -62,7 +54,7 @@ $sudo = ($stmt->fetch())["sudo"];
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         foreach ($data as $load_id => $value) : ?>
-            <a href="image-page.php?is=<?=$value["id"]?>">
+            <a href="image-page.php?id=<?=$value["id"]?>">
                 <div class="card" style="width: 18rem;">
                     <picture>
                         <source srcset="uploads/<?= pathinfo($value['image_id'], PATHINFO_FILENAME) ?>.webp" type="image/webp">
