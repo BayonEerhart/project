@@ -3,11 +3,12 @@
 include "connect.php";
 include "logic.php";
 
-$stmt = $pdo->prepare("SELECT * FROM `data` WHERE `id` = ?; (8)");
+$stmt = $pdo->prepare("SELECT * FROM `data` WHERE `id` = ?;");
 $stmt->execute([$_GET["id"]]);
 $data = $stmt->fetch();
 
-
+$stmt = $pdo->prepare("UPDATE data SET views = views + 1 WHERE id = ?;");
+$stmt->execute([ $data['id']]);
 
 
 ?>
@@ -51,10 +52,12 @@ $data = $stmt->fetch();
         <img loading="lazy" src="uploads/<?= $data['image_id'] ?>" class="img-fluid" alt="<?= htmlspecialchars($data['name_plane'], ENT_QUOTES) ?>">
     </picture>
     <p>uploaded by<?php     
-        $stmt = $pdo->prepare("SELECT name FROM user WHERE id = ?");
-        $stmt->execute([$data["user_id"]]);
-        echo $stmt->fetch()["user_id"];
+        // $stmt = $pdo->prepare("SELECT name FROM user WHERE id = ?");
+        // $stmt->execute([$data["user_id"]]);
+        // echo $stmt->fetch()["user_id"];
         ?></p>
+
+        <p>views: <?= $data["views"] + 1?></p>
     </div>   
 
 </div>

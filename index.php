@@ -53,7 +53,9 @@ include "logic.php";
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        foreach ($data as $load_id => $value) : ?>
+        foreach ($data as $load_id => $value) : 
+        if (!($value["id"] == 8)) {?>
+
             <a href="image-page.php?id=<?=$value["id"]?>">
                 <div class="card" style="width: 18rem;">
                     <picture>
@@ -66,7 +68,7 @@ include "logic.php";
                 </div>
             </a>
 
-        <?php endforeach; ?>
+        <?php } endforeach; ?>
 </div>
 
 

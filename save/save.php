@@ -10,8 +10,7 @@ $stmt = $pdo->prepare("SELECT sudo FROM user WHERE token = ?");
 $stmt->execute([$_COOKIE["token"]]);
 $sudo = ($stmt->fetch())["sudo"];
 if (!$sudo) {
-    header ("location:../index.php?fail=test server no non sudo people could upload");
-    exit();
+
     $stmt = $pdo->prepare("SELECT uploads FROM user WHERE token = ?");
     $stmt->execute([$_COOKIE["token"]]);
     $uploads = ($stmt->fetch()["uploads"]);
