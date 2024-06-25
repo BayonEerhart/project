@@ -51,10 +51,10 @@ $stmt->execute([ $data['id']]);
             <source srcset="uploads/<?= pathinfo($data['image_id'], PATHINFO_FILENAME) ?>.webp" type="image/webp">
         <img loading="lazy" src="uploads/<?= $data['image_id'] ?>" class="img-fluid" alt="<?= htmlspecialchars($data['name_plane'], ENT_QUOTES) ?>">
     </picture>
-    <p>uploaded by<?php     
-        // $stmt = $pdo->prepare("SELECT name FROM user WHERE id = ?");
-        // $stmt->execute([$data["user_id"]]);
-        // echo $stmt->fetch()["user_id"];
+    <p>uploaded by <?php     
+        $stmt = $pdo->prepare("SELECT name FROM user WHERE id = ?");
+        $stmt->execute([$data["user_id"]]);
+        echo $stmt->fetch()["name"];
         ?></p>
 
         <p>views: <?= $data["views"] + 1?></p>
