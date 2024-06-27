@@ -71,7 +71,7 @@ if ((user($pdo, "id") != 1)) {
             </picture>
         </div>
         <div class="p-2 flex-fill">
-            <div>
+            <div class="ustom-container d-none d-md-block">
                 <p>uploaded by <?= id_name($pdo, $data["user_id"])?></p>
                 <p>views : <?= $data["views"] + 1?></p>
                 <p>plane : <?= $data["name_plane"]?></p>
@@ -89,6 +89,35 @@ if ((user($pdo, "id") != 1)) {
         <?php endfor;?>
 
     </div>
+</div>
+
+
+<div>
+    <?php if (isset($_COOKIE["token"])):?>
+        <p>not yet</p>
+    <?php else: ?>
+        <div class="d-flex  justify-content-center ">
+            <h2>to see all the comands u need to be logged in</h2>
+        </div>
+        <div class="d-flex  justify-content-center ">
+                <form action="account/login.php" method="post">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">login</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new" disabled>register</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    <?php endif?>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

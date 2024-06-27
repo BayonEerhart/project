@@ -91,7 +91,7 @@ include "logic.php";
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary">login</button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new">register</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new" button>register</button>
                         </div>
                     </form>
                 </div>
