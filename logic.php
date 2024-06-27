@@ -15,7 +15,12 @@ function user($pdo, $column)
     }
 }
 
-
+function id_name($pdo, $id)
+{
+    $stmt = $pdo->prepare("SELECT name FROM user WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch()["name"];
+}
 
 
 ?>

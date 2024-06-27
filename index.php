@@ -44,9 +44,6 @@ include "logic.php";
 
 
 
-
-
-
 <div class="d-flex justify-content-evenly gap-4 flex-wrap">
     <?php 
         $stmt = $pdo->prepare("SELECT * FROM data ORDER BY RAND() LIMIT 20;");
