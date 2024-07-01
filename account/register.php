@@ -2,25 +2,26 @@
 
 include "../connect.php";
 
+$data = json_decode(file_get_contents('php://input'), true);
  
 
-if (isset($_POST["name"])  && isset($_POST["password"])  && isset($_POST["password2"]) && isset($_POST["email"])) {
-    if  (!($_POST["password"]  == $_POST["password2"])) {
+if (isset($data["name"])  && isset($data["password"])  && isset($data["password2"]) && isset($data["email"])) {
+    if  (!($data["password"]  == $data["password2"])) {
         header("location:../index.php?fail=!samepassword");
         exit();
     }
     
-    $hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-    $token = base64_encode($_POST["name"]) . "." . base64_encode(time()) . "." .  hash_hmac('sha256', $hashed_password, 'secret');
+    $hashed_password = password_hash($data["password"], PASSWORD_DEFAULT);
+    $token = base64_encode($data["name"]) . "." . base64_encode(time()) . "." .  hash_hmac('sha256', $hashed_password, 'secret');
 
 
     $stmt = $pdo->prepare("INSERT INTO user (name, email, pass, sudo, token) VALUES (?, ?, ?, ?, ?)");
-    $stmt->execute([$_POST["name"], $_POST["email"], $hashed_password, 0, $token]);
+    $stmt->execute([$data["name"], $data["email"], $hashed_password, 0, $token]);
     setcookie("token", $token, time() + (86400 * 30), "/");
 
-    header("location:../index.php");
+    echo json_encode(['success' => true]);
     exit();
 } else {
-    header("location:../index.php?fail=!filledin");
+    echo json_encode(['success' => false, 'message' => 'not all forms are filled in']);
     exit();
 }

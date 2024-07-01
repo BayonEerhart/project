@@ -1,34 +1,30 @@
 <?php
 include "../connect.php";
 
-$_COOKIE;
+header('Content-Type: application/json');
 
-$name = $_POST['name'];
-$plain_password = $_POST['password'];
+$data = json_decode(file_get_contents('php://input'), true);
 
-$stmt = $pdo->prepare('SELECT pass FROM user WHERE name = ?');
+$name = $data['name'];
+$plain_password = $data['password'];
+
+$stmt = $pdo->prepare('SELECT pass, token FROM user WHERE name = ?');
 $stmt->execute([$name]);
 $user = $stmt->fetch();
 
 if ($user) {
     $hashed_password = $user['pass'];
     if (password_verify($plain_password, $hashed_password)) {
-
-        $stmt = $pdo->prepare('SELECT token FROM user WHERE name = ?');
-        $stmt->execute([$name]);
-        $user = $stmt->fetch();
-
         setcookie("token", $user["token"], time() + (86400 * 30), "/");
 
-        header("location:../index.php");
+        echo json_encode(['success' => true]);
         exit();
     } else {
-        header("location:../index.php?fail=password");
+        echo json_encode(['success' => false, 'message' => 'Invalid password']);
         exit();
     }
 } else {
-    header("location:../index.php?fail=name");
+    echo json_encode(['success' => false, 'message' => 'Invalid username']);
     exit();
 }
-
 ?>

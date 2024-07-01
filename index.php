@@ -12,6 +12,7 @@ include "logic.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>planes</title>
     <link rel="stylesheet" href="style.css">
+    <script src="functions.js"></script>
 </head>
 <body class="">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -80,7 +81,7 @@ include "logic.php";
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="account/login.php" method="post">
+                    <form id="loginForm" onsubmit="login(event)">
                         <div class="mb-3">
                             <label for="name" class="form-label">name</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -91,7 +92,7 @@ include "logic.php";
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary">login</button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new" button>register</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new">register</button>
                         </div>
                     </form>
                 </div>
@@ -108,7 +109,7 @@ include "logic.php";
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="account/register.php" method="post">
+                    <form id="registerForm" onsubmit="register(event)">
                         <div class="mb-3">
                             <label for="name" class="form-label">name</label>
                             <input type="text" class="form-control" id="name" name="name" required>

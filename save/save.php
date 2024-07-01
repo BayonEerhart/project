@@ -69,7 +69,7 @@ function uploadRestData($data, $name_img, $pdo){
 
 
 
-if (isset($_POST["submit"])) {
+if (isset($data["submit"])) {
     // header  $_FILES["fileToUpload"]["error"];
     if (isset($_FILES["fileToUpload"]) && $_FILES["fileToUpload"]["error"] == UPLOAD_ERR_OK) {
         $target_dir = "/var/www/html/project/uploads/";
@@ -100,7 +100,7 @@ if (isset($_POST["submit"])) {
             exit();
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                uploadRestData($_POST, $db_name, $pdo);
+                uploadRestData($data, $db_name, $pdo);
                 echo shell_exec('./../uploads/optimize_images.sh ../uploads/' . htmlspecialchars($newFileName));
                 header ("location:../index.php?success=The file has been uploaded as " . htmlspecialchars($newFileName) . ".");
                 exit();

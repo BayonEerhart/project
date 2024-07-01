@@ -10,6 +10,7 @@ if ((user($pdo, "id") != 1)) {
     $stmt = $pdo->prepare("UPDATE data SET views = views + 1 WHERE id = ?;");
     $stmt->execute([$data['id']]);
 }
+
 ?>
 
 
@@ -31,6 +32,7 @@ if ((user($pdo, "id") != 1)) {
       }
     }
   </style>
+     <script src="functions.js"></script>
 </head>
 <body>
 
@@ -97,10 +99,10 @@ if ((user($pdo, "id") != 1)) {
         <p>not yet</p>
     <?php else: ?>
         <div class="d-flex  justify-content-center ">
-            <h2>to see all the comands u need to be logged in</h2>
+            <h2 class="">to see all the comands u need to be logged in</h2>
         </div>
         <div class="d-flex  justify-content-center ">
-                <form action="account/login.php" method="post">
+                <form id="loginForm" onsubmit="login(event)">
                     <div class="mb-3">
                         <label for="name" class="form-label">name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
