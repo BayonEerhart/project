@@ -95,11 +95,11 @@ if ((user($pdo, "id") != 1)) {
 
 
 <div>
-    <?php if (isset($_COOKIE["token"])):?>
+    <?php if (!isset($_COOKIE["token"])):?>
         <p>not yet</p>
     <?php else: ?>
-        <div class="d-flex  justify-content-center ">
-            <h2 class="">to see all the comands u need to be logged in</h2>
+        <div class="d-flex  justify-content-center">
+            <h2 class="bg-danger">to see all the comands u need to be logged in</h2>
         </div>
         <div class="d-flex  justify-content-center ">
                 <form id="loginForm" onsubmit="login(event)">
@@ -117,7 +117,6 @@ if ((user($pdo, "id") != 1)) {
                     </div>
                 </form>
             </div>
-            
         </div>
     <?php endif?>
 </div>

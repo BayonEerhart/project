@@ -19,7 +19,10 @@ async function login(event) {
     if (result.success) {
         window.location.reload();
     } else {
-        alert(result.message);
+        let myModal = new bootstrap.Modal(document.getElementById('fail'));
+        myModal.show();
+        document.getElementById("error-output").innerHTML = result.message;
+        history.pushState({}, "", "index.php");
     }
 }
 
@@ -45,6 +48,9 @@ async function register(event) {
     if (result.success) {
         window.location.reload();
     } else {
-        alert(result.message);
+        let myModal = new bootstrap.Modal(document.getElementById('fail'));
+        myModal.show();
+        document.getElementById("error-output").innerHTML = result.message;
+        history.pushState({}, "", "index.php");
     }
 }

@@ -7,7 +7,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 if (isset($data["name"])  && isset($data["password"])  && isset($data["password2"]) && isset($data["email"])) {
     if  (!($data["password"]  == $data["password2"])) {
-        header("location:../index.php?fail=!samepassword");
+        echo json_encode(['success' => false, 'message' => 'password is not the same']);
         exit();
     }
     
