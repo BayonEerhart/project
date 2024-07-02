@@ -4,7 +4,7 @@ include_once "../connect.php";
 set_time_limit(0); // Set maximum execution time to unlimited
 ini_set('memory_limit', '-1'); // Set memory limit to unlimited
 
-// echo  "<pre>" . var_dump($_POST) . "</pre>";
+echo  "<pre>" . var_dump($_POST) . "</pre>";
 
 $stmt = $pdo->prepare("SELECT sudo FROM user WHERE token = ?");
 $stmt->execute([$_COOKIE["token"]]);
@@ -68,6 +68,7 @@ function uploadRestData($data, $name_img, $pdo){
 
 
 
+$data = $_POST;
 
 if (isset($data["submit"])) {
     // header  $_FILES["fileToUpload"]["error"];
@@ -114,7 +115,7 @@ if (isset($data["submit"])) {
         exit();
     }
 } else {
-    header ("location:../index.php?fail=Submit button was not clicked.");
+    // header ("location:../index.php?fail=Submit button was not clicked.");
     exit();
 }
 

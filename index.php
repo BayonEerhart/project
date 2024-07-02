@@ -47,7 +47,11 @@ include "logic.php";
 
 <div class="d-flex justify-content-evenly gap-4 flex-wrap">
     <?php 
-        $stmt = $pdo->prepare("SELECT * FROM data ORDER BY RAND() LIMIT 20;");
+        // $stmt = $pdo->prepare("SELECT * FROM data ORDER BY RAND() LIMIT 20;");
+        
+        $stmt = $pdo->prepare("SELECT * FROM `data` ORDER BY `data`.`entry_date` DESC");
+
+
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
@@ -179,7 +183,7 @@ include "logic.php";
                                     <td><?=user($pdo, "uploads")?></td>
                                 </tr>
                             </table>
-                        <form action="account/logout.php" method="post">
+                        <form onsubmit="logout(event)">
                             <button type="submit" class="btn btn-primary">logout</button>
                         </form>
                         </div>

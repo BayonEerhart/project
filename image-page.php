@@ -95,8 +95,8 @@ if ((user($pdo, "id") != 1)) {
 
 
 <div>
-    <?php if (!isset($_COOKIE["token"])):?>
-        <p>not yet</p>
+    <?php if (isset($_COOKIE["token"])):?>
+        <p class="bg-danger">not yet</p>
     <?php else: ?>
         <div class="d-flex  justify-content-center">
             <h2 class="bg-danger">to see all the comands u need to be logged in</h2>

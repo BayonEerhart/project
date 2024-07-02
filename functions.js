@@ -54,3 +54,22 @@ async function register(event) {
         history.pushState({}, "", "index.php");
     }
 }
+
+async function logout(event){
+    event.preventDefault();
+
+    const response = await fetch('account/logout.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify("")
+    });
+    const result = await response.json();
+    if (result.success) {
+        window.location.reload();
+    } else {
+        console.log("cant log out")
+    }
+
+}
