@@ -28,3 +28,11 @@ CREATE TABLE `data` (
     entry_date datetime default CURRENT_TIMESTAMP,
     views  INT DEFAULT 0
 );
+
+CREATE TABLE `likes` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    image_id VARCHAR(200),
+    liked BOOLEAN,
+    UNIQUE KEY unique_like (user_id, image_id)
+);

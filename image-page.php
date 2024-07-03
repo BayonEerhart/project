@@ -23,12 +23,12 @@ if ((user($pdo, "id") != 1)) {
     <title>planes</title>
     <style>
     .custom-img {
-      width: 75%; /* Default width for larger screens */
+      width: 75%; 
     }
 
     @media (max-width: 576px) {
       .custom-img {
-        width: 100%; /* Full width on small screens */
+        width: 100%; 
       }
     }
   </style>
