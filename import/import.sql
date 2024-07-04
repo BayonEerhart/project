@@ -27,6 +27,8 @@ CREATE TABLE `data` (
     textarea_4 VARCHAR(800),
     entry_date datetime default CURRENT_TIMESTAMP,
     views  INT DEFAULT 0
+    like  INT DEFAULT 0
+    dislike  INT DEFAULT 0
 );
 
 CREATE TABLE `likes` (
@@ -34,5 +36,6 @@ CREATE TABLE `likes` (
     user_id INT,
     image_id VARCHAR(200),
     liked BOOLEAN,
+    disliked BOOLEAN,
     UNIQUE KEY unique_like (user_id, image_id)
 );

@@ -194,7 +194,6 @@ include "logic.php";
         </div>
     </div>
 
-
     <div class="modal " id="fail" tabindex="1" aria-labelledby="add" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content shake-element">

@@ -20,6 +20,7 @@ if ((user($pdo, "id") != 1)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>planes</title>
     <style>
     .custom-img {
@@ -78,6 +79,15 @@ if ((user($pdo, "id") != 1)) {
                 <p>views : <?= $data["views"] + 1?></p>
                 <p>plane : <?= $data["name_plane"]?></p>
                 <p>upload date : <?= $data["entry_date"]?></p>
+                <p id="like" value="<?=$data['likes']?>">likes : <?= $data["likes"]?></p>
+                <p id="dislike" value="<?=$data['dislike']?>">dislikes : <?= $data["dislike"]?></p>
+                <!-- ^^^^^^^^^^^^^^ -->
+                <form id="likes" onsubmit="likez(event, 'liked', <?=$data['id']?>, <?=$data['user_id']?>)">
+                    <button type="submit" class="btn btn-success">like</button>
+                </form>
+                <form id="likes" onsubmit="likez(event, 'disliked', <?=$data['id']?>, <?=$data['user_id']?>)">
+                    <button type="submit" class="btn btn-danger">dislike</button>
+                </form>
             </div>
             <div>
 
@@ -109,7 +119,7 @@ if ((user($pdo, "id") != 1)) {
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password"  class="form-control" id="password" name="password" required>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">login</button>
@@ -121,8 +131,24 @@ if ((user($pdo, "id") != 1)) {
     <?php endif?>
 </div>
 
+<div class="modal " id="fail" tabindex="1" aria-labelledby="add" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content shake-element">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title" id="add">fail</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex">
+                <p id="error-output"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

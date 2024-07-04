@@ -73,3 +73,30 @@ async function logout(event){
     }
 
 }
+
+async function likez(event, info, id, user_id) {
+    event.preventDefault();
+
+    const data = {
+        info: info,
+        id: id,
+        user_id: user_id,
+    };
+    const response = await fetch('actions/likes.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    if (result.success) {
+        console.log("worked")
+    } else {
+        let myModal = new bootstrap.Modal(document.getElementById('fail'));
+        myModal.show();
+        document.getElementById("error-output").innerHTML = result.message;
+        history.pushState({}, "", "image-page.php?id=" + id);
+    }
+}
