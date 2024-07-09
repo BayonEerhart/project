@@ -39,3 +39,10 @@ CREATE TABLE `likes` (
     disliked BOOLEAN,
     UNIQUE KEY unique_like (user_id, image_id)
 );
+
+CREATE TABLE `commands` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    image_id VARCHAR(200),
+    textarea VARCHAR(800)
+);

@@ -3,9 +3,22 @@
 include "connect.php";
 include "logic.php";
 
+
+
+
+if (!isset($_GET["id"])){
+    header("Location: error-pages/404.html"); 
+    exit();
+}
+    
 $stmt = $pdo->prepare("SELECT * FROM `data` WHERE `id` = ?;");
 $stmt->execute([$_GET["id"]]);
 $data = $stmt->fetch();
+if (!isset($data["id"])){
+    header("Location: error-pages/404.html"); 
+    exit();
+
+}
 if ((user($pdo, "id") != 1)) {
     $stmt = $pdo->prepare("UPDATE data SET views = views + 1 WHERE id = ?;");
     $stmt->execute([$data['id']]);
@@ -105,8 +118,8 @@ if ((user($pdo, "id") != 1)) {
 <div>
     <?php if (isset($_COOKIE["tester"])):?>
         <p class="bg-success">not yet</p>
-        <form  onsubmit="command(event, <?=$data['id']?>, <?=$data['user_id']?>)">
-            <input  id="comand" type="text" class="text"></input>
+        <form id="command-form" onsubmit="command(event, <?=$data['id']?>, <?=user($pdo, 'id')?>)">
+            <input id="command" type="text" class="text"></input>
         </form>
 
 

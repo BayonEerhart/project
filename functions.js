@@ -101,3 +101,29 @@ async function likez(event, info, id, user_id) {
         history.pushState({}, "", "image-page.php?id=" + id);
     }
 }
+
+
+async function command(event, id, user_id) {
+    event.preventDefault();
+
+    const formData = new FormData(document.getElementById('command-form'));
+    const data = {
+        name: formData.get('command'),
+        id: id,
+        user_id: user_id
+    };
+
+    const response = await fetch('actions/command.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    if (result.success) {
+        console.log("lol")
+    } else {
+        console.log("kek")
+    }
+}
