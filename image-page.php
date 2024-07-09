@@ -80,10 +80,10 @@ if ((user($pdo, "id") != 1)) {
                 <p>plane : <?= $data["name_plane"]?></p>
                 <p>upload date : <?= $data["entry_date"]?></p>
   
-                <form  onsubmit="likez(event, 'liked', <?=$data['id']?>, <?=$data['user_id']?>)">
+                <form  onsubmit="likez(event, 'liked', <?=$data['id']?>, <?=user($pdo, 'id')?>)">
                     <button  id="likes" type="submit" class="btn btn-success">likes : <?= $data["likes"]?></button>
                 </form>
-                <form  onsubmit="likez(event, 'disliked', <?=$data['id']?>, <?=$data['user_id']?>)">
+                <form  onsubmit="likez(event, 'disliked', <?=$data['id']?>, <?=user($pdo, 'id')?>)">
                     <button id="dislikes" type="submit" class="btn btn-danger">dislikes : <?= $data["dislike"]?></button>
                 </form>
             </div>
@@ -103,7 +103,14 @@ if ((user($pdo, "id") != 1)) {
 
 
 <div>
-    <?php if (isset($_COOKIE["token"])):?>
+    <?php if (isset($_COOKIE["tester"])):?>
+        <p class="bg-success">not yet</p>
+        <form  onsubmit="command(event, <?=$data['id']?>, <?=$data['user_id']?>)">
+            <input  id="comand" type="text" class="text"></input>
+        </form>
+
+
+    <?php elseif (isset($_COOKIE["token"])):?>
         <p class="bg-danger">not yet</p>
     <?php else: ?>
         <div class="d-flex  justify-content-center">
