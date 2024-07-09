@@ -92,7 +92,8 @@ async function likez(event, info, id, user_id) {
 
     const result = await response.json();
     if (result.success) {
-        console.log("worked")
+        document.getElementById("likes").innerHTML = "likes : " + result.likes;
+        document.getElementById("dislikes").innerHTML = "dislikes : " + result.dislikes;
     } else {
         let myModal = new bootstrap.Modal(document.getElementById('fail'));
         myModal.show();

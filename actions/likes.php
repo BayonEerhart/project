@@ -50,7 +50,7 @@ if (!$prev) {
         $stmt->execute([$data["user_id"], $data["id"]]);
         $prev = $stmt->fetchColumn();
         if($prev == 1) {
-            $stmt = $pdo->prepare("UPDATE likes SET liked = 0, disliked=1 WHERE `user_id` = ? AND `image_id` = ?;");
+            $stmt = $pdo->prepare("UPDATE likes SET liked = 0, disliked= 1 WHERE `user_id` = ? AND `image_id` = ?;");
             $stmt->execute([$data["user_id"], $data["id"]]);
             $stmt = $pdo->prepare("UPDATE data SET dislike = dislike + 1 WHERE id = ?;");
             $stmt->execute([$data["id"]]);
@@ -62,8 +62,12 @@ if (!$prev) {
 
 }
 
-    
-echo json_encode(['success' => true]);
+
+$stmt = $pdo->prepare("SELECT likes, dislike  FROM `data` WHERE `id` = ?;");
+$stmt->execute([$data["id"]]);
+$push = $stmt->fetch();
+
+echo json_encode(['success' => true, "likes" => $push["likes"], "dislikes" => $push["dislike"]]);
 exit();
 
 

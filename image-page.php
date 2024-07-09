@@ -79,14 +79,12 @@ if ((user($pdo, "id") != 1)) {
                 <p>views : <?= $data["views"] + 1?></p>
                 <p>plane : <?= $data["name_plane"]?></p>
                 <p>upload date : <?= $data["entry_date"]?></p>
-                <p id="like" value="<?=$data['likes']?>">likes : <?= $data["likes"]?></p>
-                <p id="dislike" value="<?=$data['dislike']?>">dislikes : <?= $data["dislike"]?></p>
-                <!-- ^^^^^^^^^^^^^^ -->
-                <form id="likes" onsubmit="likez(event, 'liked', <?=$data['id']?>, <?=$data['user_id']?>)">
-                    <button type="submit" class="btn btn-success">like</button>
+  
+                <form  onsubmit="likez(event, 'liked', <?=$data['id']?>, <?=$data['user_id']?>)">
+                    <button  id="likes" type="submit" class="btn btn-success">likes : <?= $data["likes"]?></button>
                 </form>
-                <form id="likes" onsubmit="likez(event, 'disliked', <?=$data['id']?>, <?=$data['user_id']?>)">
-                    <button type="submit" class="btn btn-danger">dislike</button>
+                <form  onsubmit="likez(event, 'disliked', <?=$data['id']?>, <?=$data['user_id']?>)">
+                    <button id="dislikes" type="submit" class="btn btn-danger">dislikes : <?= $data["dislike"]?></button>
                 </form>
             </div>
             <div>
