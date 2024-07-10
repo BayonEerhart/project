@@ -46,7 +46,7 @@ if ((user($pdo, "id") != 1)) {
       }
     }
   </style>
-     <script src="functions.js"></script>
+     <script defer src="functions.js"></script>
 </head>
 <body>
 
@@ -118,11 +118,22 @@ if ((user($pdo, "id") != 1)) {
 <div>
     <?php if (isset($_COOKIE["tester"])):?>
         <p class="bg-success">not yet</p>
-        <form id="command-form" onsubmit="command(event, <?=$data['id']?>, <?=user($pdo, 'id')?>)">
-            <input id="command" type="text" class="text"></input>
+        <form id="command-form" onsubmit="commands(event, <?=$data['id']?>, <?=user($pdo, 'id')?>)">
+            <textarea name="text" id="command" class="form-control" placeholder="Leave a comment here" rows="3" maxlength="800"></textarea>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <p class="bg-success">not yet</p>
 
-
+            <?php 
+            $stmt = $pdo->prepare("SELECT * FROM `commands` WHERE `image_id` = ?;");
+            $stmt->execute([$_GET["id"]]);
+            $data = $stmt->fetchall();
+            foreach ($data as $id => $value):
+            ?>
+        <div>
+            <?= $value[3];?>
+        </div>
+            <?php endforeach ?>
     <?php elseif (isset($_COOKIE["token"])):?>
         <p class="bg-danger">not yet</p>
     <?php else: ?>

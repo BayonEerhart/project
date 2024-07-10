@@ -103,13 +103,12 @@ async function likez(event, info, id, user_id) {
 }
 
 
-async function command(event, id, user_id) {
+async function commands(event, id, user_id) {
     event.preventDefault();
 
-    const formData = new FormData(document.getElementById('command-form'));
     const data = {
-        name: formData.get('command'),
-        id: id,
+        text: (document.getElementById('command').value),
+        image_id: id,
         user_id: user_id
     };
 
@@ -122,6 +121,8 @@ async function command(event, id, user_id) {
     });
     const result = await response.json();
     if (result.success) {
+        document.getElementById('command').value = ""; 
+
         console.log("lol")
     } else {
         console.log("kek")
