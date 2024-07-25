@@ -16,7 +16,7 @@ if (isset($data["name"])  && isset($data["password"])  && isset($data["password2
 
 
     $stmt = $pdo->prepare("INSERT INTO user (name, email, pass, sudo, token) VALUES (?, ?, ?, ?, ?)");
-    $stmt->execute([$data["name"], $data["email"], $hashed_password, 0, $token]);
+    $stmt->execute([$data[  "name"], $data["email"], $hashed_password, 0, $token]);
     setcookie("token", $token, time() + (86400 * 30), "/");
 
     echo json_encode(['success' => true]);

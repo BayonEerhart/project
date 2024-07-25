@@ -46,3 +46,9 @@ CREATE TABLE `commands` (
     image_id VARCHAR(200),
     textarea VARCHAR(800)
 );
+
+CREATE TABLE `testers` (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    tester_token VARCHAR(200),
+);

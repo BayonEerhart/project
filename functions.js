@@ -128,3 +128,4 @@ async function commands(event, id, user_id) {
         console.log("kek")
     }
 }
+

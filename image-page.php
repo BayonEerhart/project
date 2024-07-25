@@ -116,7 +116,7 @@ if ((user($pdo, "id") != 1)) {
 
 
 <div>
-    <?php if (isset($_COOKIE["tester"])):?>
+    <?php if (easlyacces($pdo)):?>
         <p class="bg-success">not yet</p>
         <form id="command-form" onsubmit="commands(event, <?=$data['id']?>, <?=user($pdo, 'id')?>)">
             <textarea name="text" id="command" class="form-control" placeholder="Leave a comment here" rows="3" maxlength="800"></textarea>
@@ -131,7 +131,8 @@ if ((user($pdo, "id") != 1)) {
             foreach ($data as $id => $value):
             ?>
         <div>
-            <?= $value[3];?>
+            <?= id_name($pdo, $value["user_id"])?>
+            <?= $value["textarea"];?>
         </div>
             <?php endforeach ?>
     <?php elseif (isset($_COOKIE["token"])):?>

@@ -22,5 +22,24 @@ function id_name($pdo, $id)
     return $stmt->fetch()["name"];
 }
 
+function easlyacces($pdo)
+{
+    if (!isset($_COOKIE["tester"])){
+        return false;
+    }
+    $stmt = $pdo->prepare("SELECT tester_token FROM testers WHERE user_id = ?");
+    $stmt->execute([user($pdo, "id")]);
+    if ($_COOKIE["tester"] == $stmt->fetch()["tester_token"]) {
+        return true;
+    } else {
+        return false;
+    }
+
+
+    return $stmt->fetch()["name"];
+    user($pdo, "id");
+}
+
+
 
 ?>

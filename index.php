@@ -43,6 +43,47 @@ include "logic.php";
     </div>
 </nav>
 
+<?php if (user($pdo, "sudo") == true): ?>
+<style>
+    .testing_setting {
+        position: fixed;
+        z-index: 9999; 
+        bottom: 10px;
+        right: 10px;
+    }
+</style>
+<script>
+
+
+async function  testmode(x) {
+        if (x) {
+        document.getElementById("testing_setting").innerHTML = '<button  id="test_button_fuunction" onclick="testmode(false)">testmode: off</button>';
+           
+
+        document.cookie = "tester=; expires=Thu, 01 Jan 1970 00:00:00 UTC;  path=/;";
+        
+    }else {
+        const response = await fetch('actions/tester_acces.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        document.getElementById("testing_setting").innerHTML = '<button  id="test_button_fuunction" onclick="testmode(true)">testmode: on</button>';
+    }
+}
+</script>
+<div id="testing_setting" class="testing_setting">   
+    <?php if (isset($_COOKIE["tester"])):?>
+        <button  id="test_button_fuunction" onclick="testmode(true)">testmode: on</button>
+    <?php else: ?>
+        <button  id="test_button_fuunction" onclick="testmode(false)">testmode: off</button>
+<?php endif?>
+
+</div>
+
+<?php endif?>
 
 
 <div class="d-flex justify-content-evenly gap-4 flex-wrap">
