@@ -44,3 +44,9 @@
    display: flex;
   }
 }
+
+.profile-pic {
+  width: 100px;  /* Set the desired width */
+  height: 100px; /* Set the desired height */
+  object-fit: cover; /* Ensures the image covers the container */
+}

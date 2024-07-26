@@ -35,17 +35,6 @@ if ((user($pdo, "id") != 1)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title>planes</title>
-    <style>
-    .custom-img {
-      width: 75%; 
-    }
-
-    @media (max-width: 576px) {
-      .custom-img {
-        width: 100%; 
-      }
-    }
-  </style>
      <script defer src="functions.js"></script>
 </head>
 <body>
@@ -122,7 +111,7 @@ if ((user($pdo, "id") != 1)) {
             <textarea name="text" id="command" class="form-control" placeholder="Leave a comment here" rows="3" maxlength="800"></textarea>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <p class="bg-success">not yet</p>
+        <p class="bg-success"></p>
 
             <?php 
             $stmt = $pdo->prepare("SELECT * FROM `commands` WHERE `image_id` = ?;");
@@ -130,9 +119,10 @@ if ((user($pdo, "id") != 1)) {
             $data = $stmt->fetchall();
             foreach ($data as $id => $value):
             ?>
-        <div>
-            <?= id_name($pdo, $value["user_id"])?>
-            <?= $value["textarea"];?>
+        <p>
+            <img id="profile-pic" class="img-thumbnail " src="<?= pfp(1) ?>" alt="pfp">
+            <h5><?= id_name($pdo, $value["user_id"])?></h5>
+            <p><?= $value["textarea"];?></p>
         </div>
             <?php endforeach ?>
     <?php elseif (isset($_COOKIE["token"])):?>

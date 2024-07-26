@@ -34,12 +34,16 @@ function easlyacces($pdo)
     } else {
         return false;
     }
-
-
-    return $stmt->fetch()["name"];
-    user($pdo, "id");
 }
 
+function pfp($id)
+{
+    if(file_exists("/pfp/" . $id . ".webp")) {
+        return "pfp/" . $id;
+    } else {
+        return "default.webp";
+    }
 
+}
 
 ?>
