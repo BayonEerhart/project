@@ -71,7 +71,6 @@ function uploadRestData($data, $name_img, $pdo){
 $data = $_POST;
 
 if (isset($data["submit"])) {
-    // header  $_FILES["fileToUpload"]["error"];
     if (isset($_FILES["fileToUpload"]) && $_FILES["fileToUpload"]["error"] == UPLOAD_ERR_OK) {
         $target_dir = "/var/www/html/project/uploads/";
         
@@ -115,7 +114,7 @@ if (isset($data["submit"])) {
         exit();
     }
 } else {
-    // header ("location:../index.php?fail=Submit button was not clicked.");
+    header ("location:../index.php?fail=Submit button was not clicked.");
     exit();
 }
 
