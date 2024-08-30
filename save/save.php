@@ -38,24 +38,20 @@ function uploadRestData($data, $name_img, $pdo){
 
     $condition = "INSERT INTO data (user_id, image_id, name, name_plane, title_textarea_1, textarea_1) VALUES (?, ?, ?, ?, ?, ?)";
     $values = [$user_id, $name_img, $data["name"], $data["name_plane"], $data["title_textarea_1"], $data["input1"]];
-
-    if (    isset($data["title_textarea_2"]) && $data["title_textarea_2"] != "" &&
+    if (isset($data["title_textarea_4"]) && $data["title_textarea_4"] != "" &&
+        isset($data["input4"]) && $data["input4"]) {
+            $condition = "INSERT INTO data (user_id, image_id, name, name_plane, title_textarea_1, textarea_1, title_textarea_2, textarea_2, title_textarea_3, textarea_3, title_textarea_4, textarea_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $values = [$user_id, $name_img, $data["name"], $data["name_plane"], $data["title_textarea_1"], $data["input1"], $data["title_textarea_2"], $data["input2"], $data["title_textarea_3"], $data["input3"], $data["title_textarea_4"], $data["input4"]];
+    } elseif (isset($data["title_textarea_3"]) && $data["title_textarea_3"] != "" &&
+        isset($data["input3"]) && $data["input3"]) {
+            $condition = "INSERT INTO data (user_id, image_id, name, name_plane, title_textarea_1, textarea_1, title_textarea_2, textarea_2, title_textarea_3, textarea_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $values = [$user_id, $name_img, $data["name"], $data["name_plane"], $data["title_textarea_1"], $data["input1"], $data["title_textarea_2"], $data["input2"], $data["title_textarea_3"], $data["input3"]];
+    } elseif (isset($data["title_textarea_2"]) && $data["title_textarea_2"] != "" &&
         isset($data["input2"]) && $data["input2"]) {
-        $condition = "INSERT INTO data (user_id, image_id, name, name_plane, title_textarea_1, textarea_1, title_textarea_2, textarea_2) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        $values = [$user_id, $name_img, $data["name"], $data["name_plane"], $data["title_textarea_1"], $data["input1"], $data["title_textarea_2"], $data["input2"]];
+            $condition = "INSERT INTO data (user_id, image_id, name, name_plane, title_textarea_1, textarea_1, title_textarea_2, textarea_2) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $values = [$user_id, $name_img, $data["name"], $data["name_plane"], $data["title_textarea_1"], $data["input1"], $data["title_textarea_2"], $data["input2"]];
     }
-    if (    isset($data["title_textarea_3"]) && $data["title_textarea_3"] != "" &&
-            isset($data["input3"]) && $data["input3"]) {
-        $condition = "INSERT INTO data (user_id, image_id, name, name_plane, title_textarea_1, textarea_1, title_textarea_2, textarea_2, title_textarea_3, textarea_3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $values = [$user_id, $name_img, $data["name"], $data["name_plane"], $data["title_textarea_1"], $data["input1"], $data["title_textarea_2"], $data["input2"], $data["title_textarea_3"], $data["input3"]];
-    }
-    if (    isset($data["title_textarea_4"]) && $data["title_textarea_4"] != "" &&
-            isset($data["input4"]) && $data["input4"]) {
-        $condition = "INSERT INTO data (user_id, image_id, name, name_plane, title_textarea_1, textarea_1, title_textarea_2, textarea_2, title_textarea_3, textarea_3, title_textarea_4, textarea_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $values = [$user_id, $name_img, $data["name"], $data["name_plane"], $data["title_textarea_1"], $data["input1"], $data["title_textarea_2"], $data["input2"], $data["title_textarea_3"], $data["input3"], $data["title_textarea_4"], $data["input4"]];
-    }
-    $stmt = $pdo->prepare("SELECT id FROM user WHERE token = ?");
-    $stmt->execute([$_COOKIE["token"]]);
+
     $stmt = $pdo->prepare("SELECT id FROM user WHERE token = ?");
     $stmt->execute([$_COOKIE["token"]]);
     $stmt = $pdo->prepare($condition);
@@ -63,11 +59,7 @@ function uploadRestData($data, $name_img, $pdo){
     $stmt = $pdo->prepare("UPDATE user SET uploads = uploads + 1 WHERE token = ?;");
     $stmt->execute([$_COOKIE["token"]]);
 
-    }
-
-
-
-
+}
 $data = $_POST;
 
 if (isset($data["submit"])) {
