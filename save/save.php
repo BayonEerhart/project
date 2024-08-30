@@ -101,7 +101,7 @@ if (isset($data["submit"])) {
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 uploadRestData($data, $db_name, $pdo);
-                echo shell_exec('./../uploads/optimize_images.sh ../uploads/' . htmlspecialchars($newFileName));
+                echo shell_exec('./../save/optimize_images.sh ../uploads/' . htmlspecialchars($newFileName));
                 header ("location:../index.php?success=The file has been uploaded as " . htmlspecialchars($newFileName) . ".");
                 exit();
             } else {
